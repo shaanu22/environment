@@ -1,20 +1,16 @@
-region             = "eu-west-1"
-vpc_cidr           = "10.0.0.0/16"
-subnet_1_cidr      = "10.0.1.0/24"
-subnet_2_cidr      = "10.0.2.0/24"
-my_ip_cidr         = ["172.58.178.139/32"]
-instance_ami       = "ami-01dd271720c1ba44f"
+my_ip_cidr         = ["172.58.144.155/32"]
 instance_keyname   = "techbleat_2023"
 instance_type      = "t2.micro"
 instance_count     = 2
 dynamodb_statelock = "sit_terraform_statefile_lock"
-subnet_id          = ["aws_subnet.subnet_1.id", "aws_subnet.subnet_2.id"]
+subnet_id          = ["data.terraform_remote_state.techbleat_network_config.outputs.subnet_id1", "data.terraform_remote_state.techbleat_network_config.outputs.subnet_id2"]
 default_tags = {
   "Name"        = "SIT Application Server"
   "Environment" = "SIT"
   "Owner"       = "Ms. Praddle"
   "Can_destroy" = "No"
 }
-subnet_1_tag = "SIT App Subnet 1"
-subnet_2_tag = "SIT App Subnet 2"
-availability_zones = ["eu-west-1a", "eu-west-1b"]
+subnet_1_tag = "SIT Subnet 1"
+subnet_2_tag = "SIT Subnet 2"
+availability_zones = ["us-east-1a", "us-east-1b"]
+vpc_id = data.terraform_remote_state.techbleat_network_config.outputs.my_app_vpc.id

@@ -1,1 +1,1 @@
-This directory comprises values for codebase repo
+This directory comprises values to be passed into codebase repo
